@@ -25,7 +25,7 @@ class virtualenv {
   }
 
   file { 'virtualenv_exec':
-    path    => "${script_path}/virtualenv_exec.sh",
+    path    => "/usr/local/bin/virtualenv_exec",
     ensure  => present,
     source  => 'puppet:///modules/virtualenv/virtualenv_exec.sh',
     mode    => '0755',

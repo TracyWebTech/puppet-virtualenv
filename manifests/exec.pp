@@ -5,7 +5,8 @@ define virtualenv::exec(
 ) {
   
   exec { "virtualenv exec ${virtualenv} ${command}":
-    command     => "${virtualenv::script_path}/virtualenv_exec.sh ${virtualenv} ${command}",
+    command     => "virtualenv_exec ${virtualenv} ${command}",
+    path        => '/usr/local/bin',
     user        => $user,
     require     => [Package['virtualenvwrapper'], File['virtualenv_exec']],
     environment => ["HOME=~${user}"],
