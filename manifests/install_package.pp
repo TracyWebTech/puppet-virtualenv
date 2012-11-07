@@ -1,14 +1,13 @@
 define virtualenv::install_package(
-    $virtualenv,
-    $user = undef
+  $package_name = $title,
+  $venv,
+  $user
 ) {
 
-  exec { "pip_requirements ${virtualenv} ${name}":
-    command     => "${virtualenv::script_path}/install_package.sh ${virtualenv} ${name}",
-    user        => $user,
-    require     => [Package['virtualenvwrapper'], File['install_package']],
-    environment => ["HOME=~${user}"],
-    provider    => shell,
+  exec { "pip_package ${venv} ${package_name}":
+    command => "pip install --environment=${venv} ${package_name}",
+    user    => $user,
+    path    => ['/usr/bin'],
   }
-}
   
+}
