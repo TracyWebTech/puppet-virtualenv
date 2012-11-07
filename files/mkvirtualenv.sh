@@ -1,6 +1,6 @@
 #!/bin/bash
 eval HOME=${HOME}
-source /etc/bash_completion.d/virtualenvwrapper;
+source /etc/bash_completion.d/virtualenvwrapper
 
 venv_name=$1
 venv_project=$2
