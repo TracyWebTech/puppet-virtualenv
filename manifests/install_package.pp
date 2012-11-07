@@ -11,3 +11,4 @@ define virtualenv::install_package(
     provider    => shell,
   }
 }
+  

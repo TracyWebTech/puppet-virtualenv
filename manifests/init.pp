@@ -24,23 +24,13 @@ class virtualenv {
     require => File[$script_path],
   }
 
-  file { 'install_package':
-    path    => "${script_path}/install_package.sh",
+  file { 'virtualenv_exec':
+    path    => "${script_path}/virtualenv_exec.sh",
     ensure  => present,
-    source  => 'puppet:///modules/virtualenv/install_package.sh',
+    source  => 'puppet:///modules/virtualenv/virtualenv_exec.sh',
     mode    => '0755',
     owner   => 'root',
-    group   => 'root',
-    require => File[$script_path],
-  }
-
-  file { 'install_requirements':
-    path    => "${script_path}/install_requirements.sh",
-    ensure  => present,
-    source  => 'puppet:///modules/virtualenv/install_requirements.sh',
-    mode    => '0755',
-    owner   => 'root',
-    group   => 'root',
+    group   => 'root',   
     require => File[$script_path],
   }
 }
