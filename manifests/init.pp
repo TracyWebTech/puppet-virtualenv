@@ -1,6 +1,6 @@
 class virtualenv {
 
-  $script_path = '/tmp/puppet_virtualenvwrapper/'
+  $script_path = '/tmp/puppet_virtualenvwrapper'
 
   package { "virtualenvwrapper":
     ensure => installed,
