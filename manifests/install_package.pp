@@ -10,6 +10,4 @@ define virtualenv::install_package(
     environment => ["HOME=~${user}"],
     provider    => shell,
   }
-
-  
 }
