@@ -12,6 +12,5 @@ fi
 
 if [ ! -d "$WORKON_HOME/$venv_name" ]; then
     mkvirtualenv ${opts} $1
+    deactivate
 fi
-
-deactivate
