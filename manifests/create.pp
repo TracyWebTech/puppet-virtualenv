@@ -1,5 +1,5 @@
 define virtualenv::create(
-  $user = undef
+  $user = undef,
   $project = ""
 ) {
 
