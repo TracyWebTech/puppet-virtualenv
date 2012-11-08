@@ -37,9 +37,11 @@ define virtualenv::create(
     exec { "install_packages ${venv} ${packages}":
       command     => "pip install --environment=${venv} ${packages}",
       user        => $user,
-      path        => ['/usr/bin'],
+      path        => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
       subscribe   => Exec["create_virtualenv ${venv}"],
+      require     => Exec["update distribute ${venv} ${requirements}"],
       refreshonly => true,
+      timeout     => 0,
     }
   }
 
