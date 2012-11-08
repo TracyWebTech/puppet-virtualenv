@@ -5,9 +5,9 @@ define virtualenv::install_requirements(
 ) {
 
   exec { "pip_requirements ${venv} ${requirements}":
-    command => "pip install --environment=${venv} -r ${requirements}",
+    command => "pip install -r ${requirements}",
     user    => $user,
-    path    => ['/usr/bin'],
+    path    => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
   }
   
 }
