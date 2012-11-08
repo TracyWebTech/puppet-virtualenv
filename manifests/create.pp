@@ -1,7 +1,8 @@
 define virtualenv::create(
   $venv = $title,
   $user,
-  $requirements = undef
+  $requirements = undef,
+  $packages = undef
 ) {
 
   exec { "create_virtualenv ${venv}":
@@ -15,6 +16,16 @@ define virtualenv::create(
   if $requirements {
     exec { "install_requirements ${venv} ${requirements}":
       command     => "pip install --environment=${venv} -r ${requirements}",
+      user        => $user,
+      path        => ['/usr/bin'],
+      subscribe   => Exec["create_virtualenv ${venv}"],
+      refreshonly => true,
+    }
+  }
+
+  if $packages {
+    exec { "install_packages ${venv} ${packages}":
+      command     => "pip install --environment=${venv} ${packages}",
       user        => $user,
       path        => ['/usr/bin'],
       subscribe   => Exec["create_virtualenv ${venv}"],
