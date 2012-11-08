@@ -5,9 +5,10 @@ define virtualenv::install_package(
 ) {
 
   exec { "pip_package ${venv} ${package_name}":
-    command => "pip install --environment=${venv} ${package_name}",
+    command => "pip install ${package_name}",
     user    => $user,
-    path    => ['/usr/bin'],
+    path    => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
+    timeout => 0,
   }
   
 }
