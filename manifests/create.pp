@@ -28,6 +28,7 @@ define virtualenv::create(
       subscribe   => Exec["create_virtualenv ${venv}"],
       require     => Exec["update distribute ${venv} ${requirements}"],
       refreshonly => true,
+      timeout     => 0,
     }
   }
 

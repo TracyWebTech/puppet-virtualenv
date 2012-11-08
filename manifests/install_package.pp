@@ -8,6 +8,7 @@ define virtualenv::install_package(
     command => "pip install ${package_name}",
     user    => $user,
     path    => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
+    timeout => 0,
   }
   
 }

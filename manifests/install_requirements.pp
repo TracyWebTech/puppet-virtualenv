@@ -8,6 +8,7 @@ define virtualenv::install_requirements(
     command => "pip install -r ${requirements}",
     user    => $user,
     path    => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
+    timeout => 0,
   }
   
 }
