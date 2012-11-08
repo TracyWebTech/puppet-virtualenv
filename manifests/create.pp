@@ -12,12 +12,21 @@ define virtualenv::create(
     unless  => "test -d ${venv}/bin",
   }
 
+  exec { "update distribute ${venv} ${requirements}":
+    command     => "pip install -U distribute",
+    user        => $user,
+    path        => ["${venv}/bin"],
+    subscribe   => Exec["create_virtualenv ${venv}"],
+    refreshonly => true,
+  }
+
   if $requirements {
     exec { "install_requirements ${venv} ${requirements}":
-      command     => "pip install --environment=${venv} -r ${requirements}",
+      command     => "pip install -r ${requirements}",
       user        => $user,
-      path        => ['/usr/bin'],
+      path        => ["${venv}/bin"],
       subscribe   => Exec["create_virtualenv ${venv}"],
+      require     => Exec["update distribute ${venv} ${requirements}"],
       refreshonly => true,
     }
   }
