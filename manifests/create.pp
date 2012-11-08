@@ -15,7 +15,7 @@ define virtualenv::create(
   exec { "update distribute ${venv} ${requirements}":
     command     => "pip install -U distribute",
     user        => $user,
-    path        => ["${venv}/bin"],
+    path        => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
     subscribe   => Exec["create_virtualenv ${venv}"],
     refreshonly => true,
   }
@@ -24,7 +24,7 @@ define virtualenv::create(
     exec { "install_requirements ${venv} ${requirements}":
       command     => "pip install -r ${requirements}",
       user        => $user,
-      path        => ["${venv}/bin"],
+      path        => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
       subscribe   => Exec["create_virtualenv ${venv}"],
       require     => Exec["update distribute ${venv} ${requirements}"],
       refreshonly => true,
