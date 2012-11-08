@@ -23,7 +23,7 @@ define virtualenv(
       user    => $user,
       require => Package['python-virtualenv'],
       path    => ['/usr/bin'],
-      unless  => "test -d ${venv}/bin",
+      creates => "${venv}/bin/",
     }
 
     exec { "update distribute ${venv} ${requirements}":
