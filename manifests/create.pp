@@ -7,7 +7,8 @@ define virtualenv::create(
     command => "virtualenv ${venv}",
     user    => $user,
     require => Package['python-virtualenv'],
-    path    => ['/usr/bin']
+    path    => ['/usr/bin'],
+    unless  => "test -d ${venv_path}/bin",
   }
 
 }
