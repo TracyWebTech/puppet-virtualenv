@@ -23,7 +23,7 @@ define virtualenv::virtualenv(
       creates => "${venv}/bin/",
     }
 
-    exec { "update distribute ${venv} ${requirements}":
+    exec { "update distribute ${venv}":
       command     => "pip install -U distribute",
       user        => $user,
       path        => ["${venv}/bin", "/usr/local/bin", "/usr/bin", "/bin"],
